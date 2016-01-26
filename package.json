@@ -1,0 +1,29 @@
+{
+  "name": "react-native-slide",
+  "version": "0.1.0",
+  "description": "react-native-slide",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/beefe/react-native-slide.git"
+  },
+  "keywords": [
+    "react-native",
+    "picker"
+  ],
+  "author": {
+    "name": "zooble",
+    "email": "wenliang.web@gmail.com"
+  },
+  "engines": {
+    "node": ">=4"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/beefe/react-native-slide/issues"
+  },
+  "homepage": "https://github.com/beefe/react-native-slide#readme"
+}
