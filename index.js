@@ -5,13 +5,14 @@ import React, {
 	PropTypes,
 	View,
 	Platform,
+	Dimensions,
 	ScrollView,
 	ViewPagerAndroid
 } from 'react-native';
 
 let {width, height} = Dimensions.get('window');
 
-class Slide extends React.Component{
+export default class Slide extends React.Component{
 
 	static propTypes = {
 		height: PropTypes.number,
