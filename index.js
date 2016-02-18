@@ -114,7 +114,10 @@ export default class Slide extends React.Component{
 				this.setState({
 					index: this.state.index + 1
 				});
-				this.scrollView.scrollTo(0, width*(this.state.index+1));
+				this.scrollView.scrollTo({
+					x: width*(this.state.index+1),
+					y: 0
+				});
 			}
 			else{
 				let index = this.state.index;
