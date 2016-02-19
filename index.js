@@ -232,7 +232,8 @@ export default class Slide extends React.Component{
 				let index = Math.ceil((offsetX - width)/width);
 				this._moveEnd(index);
 			}}
-			scrollEventThrottle={16}
+			//this props will cause `ScrollView doesn't take rejection well` warn
+			//scrollEventThrottle={16}
 			showsHorizontalScrollIndicator={false}
 			scrollEnable={true}
 			directionalLockEnabled={true}
