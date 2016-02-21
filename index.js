@@ -52,7 +52,8 @@ export default class Slide extends React.Component{
 	}
 
 	componentDidMount(){
-		this.state.autoPlay && this._autoPlay();
+		//this.state.autoPlay && this._autoPlay();
+		React.Children.count(this.state.children) && this.state.autoPlay && this._autoPlay();
 	}
 
 	componentWillUnmount(){
@@ -197,7 +198,12 @@ export default class Slide extends React.Component{
 	render(){
 		//first come may have no child, such as async get child
 		if(!React.Children.count(this.state.children)){//this.state.children.length?
-			return false;
+			return (
+				<View style={[styles.container, {
+					height: this.state.height
+				}]}>
+				</View>
+			);
 		}
 		let state = this.state;
 		//pagination
