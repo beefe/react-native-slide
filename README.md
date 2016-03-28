@@ -16,6 +16,9 @@ Needs react-native >= 0.14.2
 - <b>paginationWrapStyle</b> style object, style of paginationWrap
 - <b>activePaginationStyle</b> style object, style of activePaginationStyle
 
+####Method
+- <b>isDragging</b> return dragging or not
+
 ###Usage
 
 ####Step 1 - install

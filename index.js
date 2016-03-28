@@ -32,6 +32,7 @@ export default class Slide extends React.Component{
 
 	constructor(props, context){
 		super(props, context);
+		this.dragging = false;
 	}
 
 	componentWillMount(){
@@ -49,10 +50,6 @@ export default class Slide extends React.Component{
 	componentWillReceiveProps(newProps){
 		let newState = this._getStateFromProps(newProps);
 		this.setState(newState);
-	}
-
-	componentDidMount(){
-		//this.state.autoPlay && this._autoPlay();
 		React.Children.count(this.state.children) && this.state.autoPlay && this._autoPlay();
 	}
 
@@ -61,24 +58,9 @@ export default class Slide extends React.Component{
 	}
 
 	_getStateFromProps(props){
-		let height = props.height;
-		let autoPlay = props.autoPlay;
-		let loop = props.loop;
-		let showPagination = props.showPagination;
-		let paginationStyle = props.paginationStyle;
-		let paginationWrapStyle = props.paginationWrapStyle;
-		let activePaginationStyle = props.activePaginationStyle;
-		let children = props.children;
 		return {
-			height,
-			autoPlay,
-			loop,
-			showPagination,
-			paginationStyle,
-			paginationWrapStyle,
-			activePaginationStyle,
-			children
-		}
+			...props
+		};
 	}
 
 	_createPagination(){
@@ -110,6 +92,7 @@ export default class Slide extends React.Component{
 
 	_autoPlay(){
 		var interval = this.state.autoPlay;
+		clearTimeout(this.timer);
 		this.timer = setTimeout(() => {
 			if(Platform.OS === 'ios'){
 				this.setState({
@@ -195,6 +178,10 @@ export default class Slide extends React.Component{
 		}
 	}
 
+	isDragging(){
+		return this.dragging;
+	}
+
 	render(){
 		//first come may have no child, such as async get child
 		if(!React.Children.count(this.state.children)){//this.state.children.length?
@@ -250,22 +237,28 @@ export default class Slide extends React.Component{
 			ref={scrollView => this.scrollView = scrollView}
 			style={styles.scrollView}
 			initialPage={0}
+			onPageScrollStateChanged={status => {
+				//idle means not dragging
+				if(status === 'idle'){
+					this.dragging = false;
+				}
+				else if(status === 'dragging'){
+					this.dragging = true;
+				}
+				else{
+					this.dragging = false;
+				}
+			}}
 			onPageScroll={e => {
 				//this will trigger all the time when the view is sliding, but stops at e.nativeEvent.offset=0
 				let {offset, position} = e.nativeEvent;
 				if(offset === 0){
 					this._moveEnd(position);
 				}
-			}}
-			//user action
-			onPageSelected={e => {
-				
 			}}>
 			{this._getChildren()}
 		</ViewPagerAndroid>);
-		// React.Children.map(this.props.children, child=>{
-		// 	console.log(child);
-		// });
+
 		return (
 			<View style={[styles.container, {
 				height: this.state.height
