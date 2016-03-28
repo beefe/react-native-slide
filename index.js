@@ -50,6 +50,7 @@ export default class Slide extends React.Component{
 	componentWillReceiveProps(newProps){
 		let newState = this._getStateFromProps(newProps);
 		this.setState(newState);
+		clearTimeout(this.timer);
 		React.Children.count(this.state.children) && this.state.autoPlay && this._autoPlay();
 	}
 
@@ -92,7 +93,6 @@ export default class Slide extends React.Component{
 
 	_autoPlay(){
 		var interval = this.state.autoPlay;
-		clearTimeout(this.timer);
 		this.timer = setTimeout(() => {
 			if(Platform.OS === 'ios'){
 				this.setState({
