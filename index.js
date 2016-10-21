@@ -1,6 +1,13 @@
-'use strict';
+/**
+ * react-native-slide main
+ */
 
 import React, {
+	Component,
+	PropTypes
+} from 'react';
+
+import{
 	StyleSheet,
 	PropTypes,
 	View,
